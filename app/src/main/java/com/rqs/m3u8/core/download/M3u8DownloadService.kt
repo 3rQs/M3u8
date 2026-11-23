@@ -26,7 +26,7 @@ class M3u8DownloadService : DownloadService(
     override fun getScheduler(): Scheduler? = null
 
     override fun getForegroundNotification(
-        downloads: MutableList<Download>,
+        downloads: List<Download>,
         notMetRequirements: Int
     ): Notification {
         return notificationHelper.buildProgressNotification(
