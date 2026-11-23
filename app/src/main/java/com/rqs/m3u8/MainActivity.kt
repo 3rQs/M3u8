@@ -268,7 +268,7 @@ class MainActivity : AppCompatActivity() {
         val result = mutableListOf<Download>()
         var cursor: DownloadCursor? = null
         try {
-            cursor = index.getDownloads(intArrayOf())
+            cursor = index.getDownloads()
             while (cursor.moveToNext()) {
                 result.add(cursor.download)
             }
