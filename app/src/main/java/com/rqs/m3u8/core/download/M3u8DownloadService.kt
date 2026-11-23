@@ -1,5 +1,7 @@
 package com.rqs.m3u8.core.download
 
+import com.rqs.m3u8.R
+
 import android.app.Notification
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.offline.Download
