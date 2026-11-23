@@ -1,0 +1,4 @@
+<resources>
+    <string name="download_channel_name">Video downloads</string>
+    <string name="download_channel_description">Progress of offline HLS video downloads</string>
+</resources>
