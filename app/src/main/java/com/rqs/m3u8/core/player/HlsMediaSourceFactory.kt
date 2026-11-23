@@ -6,8 +6,8 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.source.MediaSource
-import androidx.media3.exoplayer.source.hls.HlsMediaSource
 import com.rqs.m3u8.core.cache.HlsCache
 
 object HlsMediaSourceFactory {
