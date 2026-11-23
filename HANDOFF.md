@@ -16,13 +16,14 @@ Date: 2026-11-23
 - `core/player/HlsMediaSourceFactory.kt`: HLS media source creation with explicit `application/x-mpegURL` MIME type.
 - `core/cache/HlsCache.kt`: app-private Media3 SimpleCache, 500 MiB LRU eviction, cache data source factory.
 - `docs/PLAYER_CACHE.md`: behavior, limitations, and manual verification.
-- `README.md`: updated project status and scope.
+- `.github/workflows/android-debug.yml`: GitHub Actions build for debug APK using JDK 17, Android SDK 35, and Gradle 8.9. No Gradle wrapper is currently required by this workflow.
 
 ## Verified
 
-- Changed files were fetched back from GitHub after writes and expected implementation markers were present.
-- Commit exists on the feature branch and PR #1 was created.
-- No Android build, emulator run, or physical-device playback test has been performed.
+- GitHub Actions workflow file was committed and fetched back from the feature branch.
+- Workflow is configured to run on pushes to `feature/hls-player-cache` and pull requests targeting `main`.
+- The workflow build itself has not yet been confirmed successful.
+- No Android device/emulator playback or cache test has been performed.
 
 ## Important limitations / risks
 
@@ -31,24 +32,26 @@ Date: 2026-11-23
 - DRM handling is not implemented.
 - HLS live playlists rotate and not every resource is guaranteed to remain cached; the 500 MiB LRU policy may evict old content.
 - No cache hit/miss display or clear-cache control yet.
-- Confirm dependency resolution and Kotlin/API compatibility with an actual Gradle build before merging.
-- Repository scaffold currently has no Gradle wrapper files; use Android Studio's compatible Gradle setup or add a wrapper in a separately reviewed change.
+- Build errors, if any, must be fixed surgically based on the actual Actions log before merging.
+
+## Build APK from Android phone
+
+1. Open https://github.com/3rQs/M3u8/actions
+2. Select **Android Debug APK**.
+3. Open the latest run for `feature/hls-player-cache`.
+4. When successful, download artifact **M3u8-debug-apk** (ZIP), then extract the APK on the phone.
 
 ## Next steps
 
-1. Open the feature branch in Android Studio with JDK 17 and Android SDK 35.
-2. Run Gradle sync and build the debug APK.
-3. Fix any compiler/dependency errors surgically; do not claim success until build output confirms it.
-4. Test an authorized HTTPS VOD HLS stream on a real device or emulator.
-5. Repeat with cache unchecked, then checked; inspect app-private cache storage and verify playback after a second request.
-6. Test invalid HTTP URL and malformed URL rejection.
-7. Review PR #1 and merge only after build and playback tests pass.
+1. Check the GitHub Actions run and inspect the first failing step/log if it fails.
+2. Download and install the debug APK only after a successful build.
+3. Test an authorized HTTPS VOD HLS stream on a real device.
+4. Repeat with cache unchecked, then checked; verify the second request and app-private cache behavior.
+5. Test invalid HTTP URL and malformed URL rejection.
+6. Review PR #1 and merge only after build and playback tests pass.
 
-## Suggested build commands
+## Local build command
 
-If a Gradle wrapper is added or available:
 ```bash
-./gradlew :app:assembleDebug
+gradle :app:assembleDebug
 ```
-
-Otherwise use Android Studio: **Build > Make Project**, then run the `app` configuration.
