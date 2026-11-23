@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             hint = "HTTPS HLS URL (.m3u8)"
             inputType = InputType.TYPE_CLASS_TEXT or
                 InputType.TYPE_TEXT_VARIATION_URI
-            singleLine = true
+            setSingleLine(true)
         }
         root.addView(urlInput, matchWidth())
 
